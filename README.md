@@ -1,35 +1,79 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
 
-## Getting Started
+## Todo List 프로젝트
 
-First, run the development server:
+#### index.tsx (수정점)
 
-```bash
-npm run dev
-# or
-yarn dev
+```
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ req }) => {
+      console.log(store);
+      try {
+        const { data } = await getTodosAPI();
+        console.log(data);
+        store.dispatch(todoActions.setTodo(data));
+        return { props: { todos: data } };
+      } catch (e) {
+        console.log(e);
+        return { props: { todos: [] } };
+      }
+    }
+);
+export default app;
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### 날짜 형식 출력(date-fns)
+```
+yarn add date-fns
+```
+formatDistance 는 두 날짜 간의 차이를 리턴하여 주고 addSuffix 를 붙여주면 'a day agdo' 형식으로 표현해준다.
+```
+{formDistance(new Date(repo.updateed_at), new Date(). {
+  addSuffix: true,
+})}
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+#### 아이콘 다운로드 받기
+1) react-icons (https://react-icons.netlify.com)
+```
+yarn add react-icons
+import { GoMail } from "react-icons/go";
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+2) iconmonstr (https://iconmonstr.com)
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+<br/>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### svg 컴포넌트 사용하기
+- svg를 리액트 안에 컴포넌트로 사용하기 위한 바벨 플러그인 설치
+```
+yarn add babel-plugin-inline-react-svg -D
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# next.js-todo-list
+- 바벨 설정 <br/>
+.babelrc
+```
+{
+    "presets": [
+        "next/babel"
+    ],
+    "plugins": [
+        [
+            "styled-components",
+            {
+                "ssr": true
+            }
+        ],
+        "inline-react-svg"
+    ]
+}
+```
+- .svg 파일을 모듈을 찾을 수 없다는 오류 처리 <br/>
+types/image.d.ts
+```
+declare module "*.svg";
+```
