@@ -6,6 +6,11 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+
+  margin: 0 auto;
+  max-width: 600px;
+  justify-content: center;
+
   height: 52px;
   padding: 0 12px;
   border-bottom: 1px solid ${pallete.gray};
@@ -16,7 +21,7 @@ const Container = styled.div`
 const Header: React.FC = () => {
   return (
     <Container>
-      <h1>JinsuJJ&apos;s TodoList</h1>
+      <h1>부엉이&apos;s TodoList</h1>
     </Container>
   );
 };

@@ -14,6 +14,10 @@ import { TodoType } from "../types/todo";
 const Container = styled.div`
   width: 100%;
 
+  max-width: 600px;
+  justify-content: center;
+  margin: 0 auto;
+
   .todo-num {
     margin-left: 12px;
   }

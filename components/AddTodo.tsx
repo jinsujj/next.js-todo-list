@@ -9,6 +9,10 @@ import { TodoType } from "../types/todo";
 const Container = styled.div`
   padding: 16px;
 
+  margin: 0 auto;
+  max-width: 600px;
+  justify-content: center;
+
   .add-todo-header-title {
     font-size: 21px;
   }
