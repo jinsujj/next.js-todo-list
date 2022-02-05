@@ -6,6 +6,8 @@ import pallete from "../styles/pallete";
 const Container = styled.footer`
   width: 100%;
   height: 53px;
+  max-width: 600px;
+
   position: fixed;
   bottom: 0;
   border-top: 1px solid ${pallete.gray};
